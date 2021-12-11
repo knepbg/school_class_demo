@@ -19,11 +19,11 @@ public interface TeacherService {
 
     Teacher findByEmailAddress(String emailAddress);
 
-    Set<Schooler> findByFirstName(String firstName);
+    Set<Teacher> findByFirstName(String firstName);
 
-    Set<Schooler> findByLastName(String lastName);
+    Set<Teacher> findByLastName(String lastName);
 
-    Set<Schooler> findAll();
+    Set<Teacher> findAll();
 
 
 }
