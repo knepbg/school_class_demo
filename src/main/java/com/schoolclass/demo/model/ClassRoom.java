@@ -25,7 +25,7 @@ public class ClassRoom {
     // className for example - a, b, c, d .. etc.
     @NotNull
     @Column(nullable = false, length = 10)
-    private String className;
+    private String classRoomName;
 
 
     // classYear - 1 , 2 , 3 ... etc. example : classYear + className = 1a, 1b,2a, 2b ... etc.

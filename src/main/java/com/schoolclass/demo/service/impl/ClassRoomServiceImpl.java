@@ -43,7 +43,7 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     // need to config exceptions
     @Override
     public ClassRoom findByName(String name) {
-        return classRoomRepository.findByName(name)
+        return classRoomRepository.findByClassRoomName(name)
                 .orElseThrow(IllegalArgumentException::new);
     }
 
