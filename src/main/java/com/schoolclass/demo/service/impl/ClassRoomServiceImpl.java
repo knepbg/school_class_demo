@@ -32,24 +32,26 @@ public class ClassRoomServiceImpl implements ClassRoomService {
         classRoomRepository.deleteById(id);
     }
 
-
     @Override
     public Set<ClassRoom> findAll() {
-        SortedSet<ClassRoom> classRooms = new TreeSet<>(Comparator.comparing(ClassRoom::getId));
+        SortedSet<ClassRoom> classRooms = new TreeSet<>(Comparator
+                .comparing(ClassRoom::getId));
         classRooms.addAll(classRoomRepository.findAll());
         return classRooms;
     }
 
-    // validation needed
+    // need to config exceptions
     @Override
     public ClassRoom findByName(String name) {
-        return classRoomRepository.findByName(name);
+        return classRoomRepository.findByName(name)
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     // need to configure Exception
     @Override
     public ClassRoom findById(Long id) {
-        return classRoomRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return classRoomRepository.findById(id)
+                .orElseThrow(IllegalArgumentException::new);
     }
 
     // Only year of the class can be updated -- from 1 to 2 to 3 .. etc.
