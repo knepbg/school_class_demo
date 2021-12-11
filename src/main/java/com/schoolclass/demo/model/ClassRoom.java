@@ -13,8 +13,8 @@ import javax.validation.constraints.NotNull;
 @Builder
 @Getter
 @Entity
-@Table(name = "classes")
-public class Class {
+@Table(name = "class_rooms")
+public class ClassRoom {
 
 
     @Id
