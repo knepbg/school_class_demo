@@ -14,6 +14,8 @@ public interface ClassRoomService {
 
     ClassRoom findByName(String name);
 
+    ClassRoom findById(Long id);
+
     ClassRoom update(ClassRoom classRoom, Long id);
 
 
