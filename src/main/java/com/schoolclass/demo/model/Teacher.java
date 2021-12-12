@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,5 +41,6 @@ public class Teacher {
     @Column(unique = true, length = 25)
     private String emailAddress;
 
-
+    @ManyToMany
+    private Set<Subject> subjects;
 }

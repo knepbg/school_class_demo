@@ -6,10 +6,7 @@ import com.schoolclass.demo.service.ClassRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 @Service
 public class ClassRoomServiceImpl implements ClassRoomService {
@@ -40,11 +37,10 @@ public class ClassRoomServiceImpl implements ClassRoomService {
         return classRooms;
     }
 
-    // need to config exceptions
+    //it will find for example 1a , 2a, 3a .. ?
     @Override
-    public ClassRoom findByName(String name) {
-        return classRoomRepository.findByClassRoomName(name)
-                .orElseThrow(IllegalArgumentException::new);
+    public Set<ClassRoom> findByClassRoomName(String classRoomName) {
+        return new HashSet<>(classRoomRepository.findByClassRoomName(classRoomName));
     }
 
     // need to configure Exception

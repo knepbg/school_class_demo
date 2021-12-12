@@ -32,4 +32,7 @@ public class Schooler {
     @NotNull
     @Column(nullable = false, unique = true)
     private String numberInClass;
+
+    @ManyToOne
+    private ClassRoom classRoom;
 }

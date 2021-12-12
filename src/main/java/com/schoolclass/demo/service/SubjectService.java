@@ -13,7 +13,8 @@ public interface SubjectService {
 
     void delete(String subjectName);
 
-   Subject findByName(String subjectName);
+    // subjectName in unique
+   Subject findBySubjectName(String subjectName);
 
     Subject findById(Long id);
 

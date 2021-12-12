@@ -12,7 +12,7 @@ public interface ClassRoomService {
 
     Set<ClassRoom> findAll();
 
-    ClassRoom findByName(String name);
+    Set<ClassRoom> findByClassRoomName(String classRoomName);
 
     ClassRoom findById(Long id);
 

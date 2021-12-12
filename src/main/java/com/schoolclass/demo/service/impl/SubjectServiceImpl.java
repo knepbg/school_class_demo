@@ -36,16 +36,17 @@ public class SubjectServiceImpl implements SubjectService {
         return subjectRepository.save(updatedSubject);
     }
 
+    // subjectName is unique
     @Override
     public void delete(String subjectName) {
-        Subject findSubject = findByName(subjectName);
-        subjectRepository.deleteById(findSubject.getId());
+        Subject foundBySubjectName = findBySubjectName(subjectName);
+        subjectRepository.deleteById(foundBySubjectName.getId());
     }
 
-    // need to config exceptions
+    // need to config exceptions, subject name is unique
     @Override
-    public Subject findByName(String subjectName) {
-        return subjectRepository.findByName(subjectName)
+    public Subject findBySubjectName(String subjectName) {
+        return subjectRepository.findBySubjectName(subjectName)
                 .orElseThrow(IllegalArgumentException::new);
     }
 

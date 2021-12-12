@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,4 +24,10 @@ public class Subject {
     @NotNull
     @Column(nullable = false, unique = true)
     private String subjectName;
+
+    @ManyToMany(mappedBy = "subjects")
+    private Set<Teacher> teachers;
+
+    @ManyToMany(mappedBy = "subjects")
+    private Set<ClassRoom> classRooms;
 }
