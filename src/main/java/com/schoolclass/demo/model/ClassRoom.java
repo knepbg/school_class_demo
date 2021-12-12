@@ -25,7 +25,7 @@ public class ClassRoom {
 
     // className for example - a, b, c, d .. etc.
     @NotNull
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false)
     private String classRoomName;
 
 
@@ -38,7 +38,7 @@ public class ClassRoom {
 
     // classProfile for example - Math, Information technology, biology .. etc.
     @NotNull
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String classProfile;
 
     @OneToMany(mappedBy = "classRoom")

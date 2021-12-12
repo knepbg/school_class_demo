@@ -3,6 +3,8 @@ package com.schoolclass.demo.service.impl;
 import com.schoolclass.demo.model.ClassRoom;
 import com.schoolclass.demo.repository.ClassRoomRepository;
 import com.schoolclass.demo.service.ClassRoomService;
+import com.schoolclass.demo.service.SchoolerService;
+import com.schoolclass.demo.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +14,14 @@ import java.util.*;
 public class ClassRoomServiceImpl implements ClassRoomService {
 
     private final ClassRoomRepository classRoomRepository;
+    private final SchoolerService schoolerService;
+    private final SubjectService subjectService;
 
     @Autowired
-    public ClassRoomServiceImpl(ClassRoomRepository classRoomRepository) {
+    public ClassRoomServiceImpl(ClassRoomRepository classRoomRepository, SchoolerService schoolerService, SubjectService subjectService) {
         this.classRoomRepository = classRoomRepository;
+        this.schoolerService = schoolerService;
+        this.subjectService = subjectService;
     }
 
     @Override
@@ -57,6 +63,7 @@ public class ClassRoomServiceImpl implements ClassRoomService {
         ClassRoom updatedClassRoom = ClassRoom.builder()
                 .id(foundedClassRoom.getId())
                 .classYear(classRoom.getClassYear())
+                .classProfile(classRoom.getClassProfile())
                 .build();
         return classRoomRepository.save(updatedClassRoom);
     }

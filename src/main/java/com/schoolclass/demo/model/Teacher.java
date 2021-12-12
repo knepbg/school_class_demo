@@ -22,23 +22,23 @@ public class Teacher {
     private Long id;
 
     @NotNull
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false)
     private String firstName;
 
     @NotNull
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false)
     private String lastName;
 
     @NotNull
-    @Column(nullable = false, updatable = false, length = 10)
+    @Column(nullable = false, updatable = false)
     private String ucn;
 
     // length 13 such as +359 876 123 456
     @NotNull
-    @Column(unique = true, nullable = false, length = 13)
+    @Column(unique = true, nullable = false)
     private String telephoneNumber;
 
-    @Column(unique = true, length = 25)
+    @Column(unique = true)
     private String emailAddress;
 
     @ManyToMany

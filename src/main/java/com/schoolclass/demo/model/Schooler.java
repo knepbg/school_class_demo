@@ -21,11 +21,11 @@ public class Schooler {
     private Long id;
 
     @NotNull
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false)
     private String firstName;
 
     @NotNull
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false)
     private String lastName;
 
     // number in class, such as 01,02,02 ...
