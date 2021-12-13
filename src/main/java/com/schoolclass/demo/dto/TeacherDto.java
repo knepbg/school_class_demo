@@ -26,5 +26,5 @@ public class TeacherDto {
 
     private String emailAddress;
 
-    private Set<Subject> subjects;
+    private Set<Long> subjectsId;
 }

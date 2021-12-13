@@ -2,6 +2,7 @@ package com.schoolclass.demo.service.impl;
 
 import com.schoolclass.demo.model.Teacher;
 import com.schoolclass.demo.repository.TeacherRepository;
+import com.schoolclass.demo.service.SubjectService;
 import com.schoolclass.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,12 @@ import java.util.TreeSet;
 public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
+    private final SubjectService subjectService;
 
     @Autowired
-    public TeacherServiceImpl(TeacherRepository teacherRepository) {
+    public TeacherServiceImpl(TeacherRepository teacherRepository, SubjectService subjectService) {
         this.teacherRepository = teacherRepository;
+        this.subjectService = subjectService;
     }
 
     @Override
