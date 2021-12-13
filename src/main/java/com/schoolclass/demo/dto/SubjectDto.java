@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -17,8 +15,5 @@ public class SubjectDto {
 
     private String subjectName;
 
-    private Set<Long> teachersId;
-
-    private Set<Long> classRoomsId;
 
 }

@@ -2,9 +2,7 @@ package com.schoolclass.demo.service.impl;
 
 import com.schoolclass.demo.model.Subject;
 import com.schoolclass.demo.repository.SubjectRepository;
-import com.schoolclass.demo.service.ClassRoomService;
 import com.schoolclass.demo.service.SubjectService;
-import com.schoolclass.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +15,12 @@ import java.util.TreeSet;
 public class SubjectServiceImpl implements SubjectService {
 
     private final SubjectRepository subjectRepository;
-    private final TeacherService teacherService;
-    private final ClassRoomService classRoomService;
 
     @Autowired
-    public SubjectServiceImpl(SubjectRepository subjectRepository, TeacherService teacherService, ClassRoomService classRoomService) {
+    public SubjectServiceImpl(SubjectRepository subjectRepository) {
         this.subjectRepository = subjectRepository;
-        this.teacherService = teacherService;
-        this.classRoomService = classRoomService;
     }
+
 
     @Override
     public Subject save(Subject subject) {
