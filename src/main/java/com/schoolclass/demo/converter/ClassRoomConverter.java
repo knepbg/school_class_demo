@@ -37,11 +37,16 @@ public class ClassRoomConverter {
                 .schoolers(classRoomDto.getSchoolersId()
                         .stream()
                         .map((schoolersId) ->
-                                Schooler.builder().id(schoolersId).build())
+                                Schooler.builder()
+                                        .id(schoolersId)
+                                        .build())
                         .collect(Collectors.toSet()))
                 .subjects(classRoomDto.getSubjectsId()
                         .stream()
-                        .map((subjectsId) -> Subject.builder().id(subjectsId).build())
+                        .map((subjectsId) ->
+                                Subject.builder()
+                                        .id(subjectsId)
+                                        .build())
                         .collect(Collectors.toSet()))
                 .build();
     }
