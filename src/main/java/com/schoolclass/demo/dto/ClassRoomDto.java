@@ -23,7 +23,7 @@ public class ClassRoomDto {
 
     private String classProfile;
 
-    private Set<Schooler> schoolers;
+    private Set<Long> schoolersId;
 
-    private Set<Subject> subjects;
+    private Set<Long> subjectsId;
 }
