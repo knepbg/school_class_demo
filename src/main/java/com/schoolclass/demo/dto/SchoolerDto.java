@@ -20,6 +20,6 @@ public class SchoolerDto {
 
     private String numberInClass;
 
-    private ClassRoom classRoom;
+    private Long classRoomId;
 
 }

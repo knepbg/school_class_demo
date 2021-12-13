@@ -28,7 +28,7 @@ public class ClassRoomConverter {
                 .build();
     }
 
-    public ClassRoom toClassRoom (ClassRoomDto classRoomDto) {
+    public ClassRoom toClassRoom(ClassRoomDto classRoomDto) {
         return ClassRoom.builder()
                 .id(classRoomDto.getId())
                 .classRoomName(classRoomDto.getClassRoomName())

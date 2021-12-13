@@ -2,6 +2,7 @@ package com.schoolclass.demo.service.impl;
 
 import com.schoolclass.demo.model.Schooler;
 import com.schoolclass.demo.repository.SchoolerRepository;
+import com.schoolclass.demo.service.ClassRoomService;
 import com.schoolclass.demo.service.SchoolerService;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,11 @@ import java.util.TreeSet;
 public class SchoolerServiceImpl implements SchoolerService {
 
     private final SchoolerRepository schoolerRepository;
+    private final ClassRoomService classRoomService;
 
-    public SchoolerServiceImpl(SchoolerRepository schoolerRepository) {
+    public SchoolerServiceImpl(SchoolerRepository schoolerRepository, ClassRoomService classRoomService) {
         this.schoolerRepository = schoolerRepository;
+        this.classRoomService = classRoomService;
     }
 
     @Override
