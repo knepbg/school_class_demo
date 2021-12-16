@@ -13,7 +13,6 @@ public class ClassRoomConverter {
 
     public ClassRoomDto toClassRoomDto(ClassRoom classRoom) {
         return ClassRoomDto.builder()
-                .id(classRoom.getId())
                 .classRoomName(classRoom.getClassRoomName())
                 .classYear(classRoom.getClassYear())
                 .classProfile(classRoom.getClassProfile())
@@ -30,21 +29,20 @@ public class ClassRoomConverter {
 
     public ClassRoom toClassRoom(ClassRoomDto classRoomDto) {
         return ClassRoom.builder()
-                .id(classRoomDto.getId())
                 .classRoomName(classRoomDto.getClassRoomName())
                 .classYear(classRoomDto.getClassYear())
                 .classProfile(classRoomDto.getClassProfile())
                 .schoolers(classRoomDto.getSchoolersId()
                         .stream()
                         .map((schoolersId) -> Schooler.builder()
-                                        .id(schoolersId)
-                                        .build())
+                                .id(schoolersId)
+                                .build())
                         .collect(Collectors.toSet()))
                 .subjects(classRoomDto.getSubjectsId()
                         .stream()
                         .map((subjectsId) -> Subject.builder()
-                                        .id(subjectsId)
-                                        .build())
+                                .id(subjectsId)
+                                .build())
                         .collect(Collectors.toSet()))
                 .build();
     }

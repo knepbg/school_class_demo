@@ -24,7 +24,7 @@ public class ClassRoomServiceImpl implements ClassRoomService {
         return classRoomRepository.save(classRoom);
     }
 
-    // validation needed
+    // TODO: Exception need
     @Override
     public void delete(Long id) {
         classRoomRepository.deleteById(id);
@@ -44,7 +44,7 @@ public class ClassRoomServiceImpl implements ClassRoomService {
         return new HashSet<>(classRoomRepository.findByClassRoomName(classRoomName));
     }
 
-    // need to configure Exception
+    //TODO: need to configure Exception
     @Override
     public ClassRoom findById(Long id) {
         return classRoomRepository.findById(id)

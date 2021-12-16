@@ -44,28 +44,28 @@ public class TeacherServiceImpl implements TeacherService {
         teacherRepository.deleteById(foundTeacher.getId());
     }
 
-    // need to config exception
+    //TODO: need to config exception
     @Override
     public Teacher findByUcn(String ucn) {
         return teacherRepository.findByUcn(ucn)
                 .orElseThrow(IllegalAccessError::new);
     }
 
-    // need to config exception
+    //TODO:  need to config exception
     @Override
     public Teacher findByTelephoneNumber(String telephoneNumber) {
         return teacherRepository.findByTelephoneNumber(telephoneNumber)
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    // need to config exception
+    //TODO: need to config exception
     @Override
     public Teacher findByEmailAddress(String emailAddress) {
         return teacherRepository.findByEmailAddress(emailAddress)
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    // need validations
+    //TODO: need to config exception
     @Override
     public Set<Teacher> findByFirstName(String firstName) {
         SortedSet<Teacher> teachers = new TreeSet<>(Comparator
@@ -75,7 +75,7 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
 
-    //need validations
+    //TODO: need to config exception
     @Override
     public Set<Teacher> findByLastName(String lastName) {
         SortedSet<Teacher> teachers = new TreeSet<>(Comparator

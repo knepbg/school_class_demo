@@ -28,7 +28,7 @@ public class SchoolerServiceImpl implements SchoolerService {
     }
 
 
-    // need to config exceptions
+    //TODO: need to config exceptions
     @Override
     public Schooler findByNumberInClass(String numberInClass) {
         return schoolerRepository.findByNumberInClass(numberInClass)
@@ -36,7 +36,7 @@ public class SchoolerServiceImpl implements SchoolerService {
     }
 
 
-    // need validations ?!
+    //TODO: need to config exception
     @Override
     public Set<Schooler> findByFirstName(String firstName) {
         SortedSet<Schooler> schoolers = new TreeSet<>(Comparator
@@ -45,7 +45,7 @@ public class SchoolerServiceImpl implements SchoolerService {
         return schoolers;
     }
 
-    // need validations ?!
+    //TODO: need to config exception
     @Override
     public Set<Schooler> findByLastName(String lastName) {
         SortedSet<Schooler> schoolers = new TreeSet<>(Comparator
@@ -75,7 +75,7 @@ public class SchoolerServiceImpl implements SchoolerService {
         return schoolerRepository.save(updatedSchooler);
     }
 
-    // need to config exceptions
+    //TODO: need to config exceptions
     @Override
     public void delete(String numberInClass) {
         Schooler foundedSchooler = schoolerRepository

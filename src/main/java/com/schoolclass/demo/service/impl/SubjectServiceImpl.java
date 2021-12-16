@@ -44,14 +44,15 @@ public class SubjectServiceImpl implements SubjectService {
         subjectRepository.deleteById(foundBySubjectName.getId());
     }
 
-    // need to config exceptions, subject name is unique
+    // TODO: need to config exceptions
+    // subject name is unique
     @Override
     public Subject findBySubjectName(String subjectName) {
         return subjectRepository.findBySubjectName(subjectName)
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    // need to config exceptions
+    //TODO: need to config exceptions
     @Override
     public Subject findById(Long id) {
         return subjectRepository.findById(id)
