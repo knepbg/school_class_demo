@@ -23,7 +23,7 @@ public class ClassRoomController {
     }
 
     @PostMapping
-    public ResponseEntity<ClassRoomDto> save (@RequestBody ClassRoomDto classRoomDto){
+    public ResponseEntity<ClassRoomDto> save(@RequestBody ClassRoomDto classRoomDto) {
         ClassRoom classRoom = classRoomConverter.toClassRoom(classRoomDto);
         ClassRoom savedClassRoom = classRoomService.save(classRoom);
         ClassRoomDto classRoomDtoResponse = classRoomConverter.toClassRoomDto(savedClassRoom);
@@ -32,13 +32,13 @@ public class ClassRoomController {
     }
 
     @GetMapping
-    public ResponseEntity<Set<ClassRoomDto>> findAll () {
+    public ResponseEntity<Set<ClassRoomDto>> findAll() {
         Set<ClassRoom> foundAll = classRoomService.findAll();
         Set<ClassRoomDto> responseClassRoomDto = foundAll
                 .stream()
                 .map(classRoomConverter::toClassRoomDto)
                 .collect(Collectors.toSet());
-       return ResponseEntity.ok(responseClassRoomDto);
+        return ResponseEntity.ok(responseClassRoomDto);
 
     }
 }
