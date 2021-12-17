@@ -1,6 +1,8 @@
 package com.schoolclass.demo.converter;
 
+import com.schoolclass.demo.dto.SubjectDto;
 import com.schoolclass.demo.dto.TeacherDto;
+import com.schoolclass.demo.dto.TeacherResponse;
 import com.schoolclass.demo.model.Subject;
 import com.schoolclass.demo.model.Teacher;
 import org.springframework.stereotype.Component;
@@ -38,6 +40,20 @@ public class TeacherConverter {
                         .map((subjectsId) ->
                                 Subject.builder()
                                         .id(subjectsId)
+                                        .build())
+                        .collect(Collectors.toSet()))
+                .build();
+    }
+
+    public TeacherResponse toTeacherResponse(Teacher teacher) {
+        return TeacherResponse.builder()
+                .firstName(teacher.getFirstName())
+                .lastName(teacher.getLastName())
+                .telephoneNumber(teacher.getTelephoneNumber())
+                .emailAddress(teacher.getEmailAddress())
+                .subjectDtos(teacher.getSubjects().stream().map(Subject ->
+                                SubjectDto.builder()
+                                        .subjectName(Subject.getSubjectName())
                                         .build())
                         .collect(Collectors.toSet()))
                 .build();

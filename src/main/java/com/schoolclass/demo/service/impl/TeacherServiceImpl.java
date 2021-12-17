@@ -1,28 +1,38 @@
 package com.schoolclass.demo.service.impl;
 
+import com.schoolclass.demo.model.Subject;
 import com.schoolclass.demo.model.Teacher;
 import com.schoolclass.demo.repository.TeacherRepository;
+import com.schoolclass.demo.service.SubjectService;
 import com.schoolclass.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
+    private final SubjectService subjectService;
 
     @Autowired
-    public TeacherServiceImpl(TeacherRepository teacherRepository) {
+    public TeacherServiceImpl(TeacherRepository teacherRepository, SubjectService subjectService) {
         this.teacherRepository = teacherRepository;
+        this.subjectService = subjectService;
     }
 
     @Override
     public Teacher save(Teacher teacher) {
+
+//        Set<Subject> subjects = new HashSet<>();
+//        for(Subject subject : teacher.getSubjects()) {
+//            Subject foundSubject = subjectService.findById(subject.getId());
+//            subjects.add(foundSubject);
+
+       //     Set<Subject> subjects1 = teacher.getSubjects().stream().map().collect(Collectors.toSet());
+       // }
         return teacherRepository.save(teacher);
     }
 

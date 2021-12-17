@@ -2,6 +2,7 @@ package com.schoolclass.demo.controller;
 
 import com.schoolclass.demo.converter.TeacherConverter;
 import com.schoolclass.demo.dto.TeacherDto;
+import com.schoolclass.demo.dto.TeacherResponse;
 import com.schoolclass.demo.model.Teacher;
 import com.schoolclass.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,10 @@ public class TeacherController {
     }
 
     @PostMapping
-    public ResponseEntity<TeacherDto> save(@RequestBody TeacherDto teacherDto) {
+    public ResponseEntity<TeacherResponse> save(@RequestBody TeacherDto teacherDto) {
         Teacher requestSaveTeacherDto = teacherConverter.toTeacher(teacherDto);
         Teacher savedTeacher = teacherService.save(requestSaveTeacherDto);
-        return ResponseEntity.ok(teacherConverter.toTeacherDto(savedTeacher));
+        return ResponseEntity.ok(teacherConverter.toTeacherResponse(savedTeacher));
     }
 
     @GetMapping
