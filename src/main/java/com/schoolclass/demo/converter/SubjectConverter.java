@@ -1,6 +1,7 @@
 package com.schoolclass.demo.converter;
 
 import com.schoolclass.demo.dto.SubjectDto;
+import com.schoolclass.demo.dto.SubjectResponse;
 import com.schoolclass.demo.model.Subject;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,12 @@ public class SubjectConverter {
         return Subject.builder()
                 .id(subjectDto.getId())
                 .subjectName(subjectDto.getSubjectName())
+                .build();
+    }
+
+    public SubjectResponse toSubjectResponse(Subject subject) {
+        return SubjectResponse.builder()
+                .subjectName(subject.getSubjectName())
                 .build();
     }
 }

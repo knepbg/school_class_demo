@@ -30,10 +30,23 @@ public class TeacherServiceImpl implements TeacherService {
 //        for(Subject subject : teacher.getSubjects()) {
 //            Subject foundSubject = subjectService.findById(subject.getId());
 //            subjects.add(foundSubject);
+//        }
 
-       //     Set<Subject> subjects1 = teacher.getSubjects().stream().map().collect(Collectors.toSet());
-       // }
-        return teacherRepository.save(teacher);
+        Set<Subject> subjects1 = teacher.getSubjects().stream()
+                .map((subject) -> subjectService.findById(subject.getId()))
+                .collect(Collectors.toSet());
+
+        Teacher savedTeacher = Teacher.builder()
+                .id(teacher.getId())
+                .telephoneNumber(teacher.getTelephoneNumber())
+                .emailAddress(teacher.getEmailAddress())
+                .firstName(teacher.getFirstName())
+                .lastName(teacher.getLastName())
+                .ucn(teacher.getUcn())
+                .subjects(subjects1)
+                .build();
+
+        return teacherRepository.save(savedTeacher);
     }
 
     @Override

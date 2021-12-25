@@ -1,10 +1,10 @@
 package com.schoolclass.demo.converter;
 
-import com.schoolclass.demo.dto.SubjectDto;
 import com.schoolclass.demo.dto.TeacherDto;
 import com.schoolclass.demo.dto.TeacherResponse;
 import com.schoolclass.demo.model.Subject;
 import com.schoolclass.demo.model.Teacher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
@@ -12,9 +12,11 @@ import java.util.stream.Collectors;
 @Component
 public class TeacherConverter {
 
+    @Autowired
+    private SubjectConverter subjectConverter;
+
     public TeacherDto toTeacherDto(Teacher teacher) {
         return TeacherDto.builder()
-                .id(teacher.getId())
                 .firstName(teacher.getFirstName())
                 .lastName(teacher.getLastName())
                 .emailAddress(teacher.getEmailAddress())
@@ -29,7 +31,6 @@ public class TeacherConverter {
 
     public Teacher toTeacher(TeacherDto teacherDto) {
         return Teacher.builder()
-                .id(teacherDto.getId())
                 .firstName(teacherDto.getFirstName())
                 .lastName(teacherDto.getLastName())
                 .ucn(teacherDto.getUcn())
@@ -51,10 +52,8 @@ public class TeacherConverter {
                 .lastName(teacher.getLastName())
                 .telephoneNumber(teacher.getTelephoneNumber())
                 .emailAddress(teacher.getEmailAddress())
-                .subjectDtos(teacher.getSubjects().stream().map(Subject ->
-                                SubjectDto.builder()
-                                        .subjectName(Subject.getSubjectName())
-                                        .build())
+                .subjectResponses(teacher.getSubjects().stream()
+                        .map(subjectConverter::toSubjectResponse)
                         .collect(Collectors.toSet()))
                 .build();
     }

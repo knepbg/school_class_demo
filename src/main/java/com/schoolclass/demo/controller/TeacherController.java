@@ -29,15 +29,16 @@ public class TeacherController {
     public ResponseEntity<TeacherResponse> save(@RequestBody TeacherDto teacherDto) {
         Teacher requestSaveTeacherDto = teacherConverter.toTeacher(teacherDto);
         Teacher savedTeacher = teacherService.save(requestSaveTeacherDto);
-        return ResponseEntity.ok(teacherConverter.toTeacherResponse(savedTeacher));
+        TeacherResponse teacherResponse = teacherConverter.toTeacherResponse(savedTeacher);
+        return ResponseEntity.ok(teacherResponse);
     }
 
     @GetMapping
-    public ResponseEntity<Set<TeacherDto>> findAll() {
+    public ResponseEntity<Set<TeacherResponse>> findAll() {
         Set<Teacher> foundTeachers = teacherService.findAll();
-        Set<TeacherDto> responseTeachersDto = foundTeachers.stream()
-                .map(teacherConverter::toTeacherDto)
+        Set<TeacherResponse> teacherResponses = foundTeachers.stream()
+                .map(teacherConverter::toTeacherResponse)
                 .collect(Collectors.toSet());
-        return ResponseEntity.ok(responseTeachersDto);
+        return ResponseEntity.ok(teacherResponses);
     }
 }

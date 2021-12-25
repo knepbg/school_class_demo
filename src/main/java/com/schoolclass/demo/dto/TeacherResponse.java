@@ -21,5 +21,5 @@ public class TeacherResponse {
 
     private String emailAddress;
 
-    private Set<SubjectDto> subjectDtos;
+    private Set<SubjectResponse> subjectResponses;
 }
