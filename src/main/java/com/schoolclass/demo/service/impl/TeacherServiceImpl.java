@@ -8,7 +8,10 @@ import com.schoolclass.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,12 +28,6 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher save(Teacher teacher) {
-
-//        Set<Subject> subjects = new HashSet<>();
-//        for(Subject subject : teacher.getSubjects()) {
-//            Subject foundSubject = subjectService.findById(subject.getId());
-//            subjects.add(foundSubject);
-//        }
 
         Set<Subject> subjects1 = teacher.getSubjects().stream()
                 .map((subject) -> subjectService.findById(subject.getId()))
@@ -50,12 +47,15 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher update(Teacher teacher, String ucn) {
+    public Teacher update(Teacher teacher, String ucn, Subject subject) {
         Teacher foundTeacher = findByUcn(ucn);
         Teacher updatedTeacher = Teacher.builder()
                 .id(foundTeacher.getId())
                 .emailAddress(teacher.getEmailAddress())
                 .telephoneNumber(teacher.getTelephoneNumber())
+                .subjects(teacher.getSubjects().stream().map(subject1 ->
+                                subjectService.save(subject))
+                        .collect(Collectors.toSet()))
                 .build();
         return teacherRepository.save(updatedTeacher);
     }

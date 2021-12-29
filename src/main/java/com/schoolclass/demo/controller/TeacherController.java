@@ -27,8 +27,8 @@ public class TeacherController {
 
     @PostMapping
     public ResponseEntity<TeacherResponse> save(@RequestBody TeacherDto teacherDto) {
-        Teacher requestSaveTeacherDto = teacherConverter.toTeacher(teacherDto);
-        Teacher savedTeacher = teacherService.save(requestSaveTeacherDto);
+        Teacher requestSaveTeacher = teacherConverter.toTeacher(teacherDto);
+        Teacher savedTeacher = teacherService.save(requestSaveTeacher);
         TeacherResponse teacherResponse = teacherConverter.toTeacherResponse(savedTeacher);
         return ResponseEntity.ok(teacherResponse);
     }
@@ -41,4 +41,9 @@ public class TeacherController {
                 .collect(Collectors.toSet());
         return ResponseEntity.ok(teacherResponses);
     }
+
+//    @PutMapping
+//    public ResponseEntity<TeacherResponse> updateTeacher(@RequestBody TeacherDto teacherDto) {
+//
+//    }
 }
