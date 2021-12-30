@@ -42,8 +42,30 @@ public class TeacherController {
         return ResponseEntity.ok(teacherResponses);
     }
 
-//    @PutMapping
-//    public ResponseEntity<TeacherResponse> updateTeacher(@RequestBody TeacherDto teacherDto) {
-//
-//    }
+    @PutMapping(value = "/{ucn}/telephoneNumber/{telephoneNumber}")
+    public ResponseEntity<TeacherResponse> updateTeacherTelephoneNumber(@PathVariable String ucn,
+                                                                        @PathVariable String telephoneNumber) {
+        Teacher updatedTeacher = teacherService.updateTeacherTelephoneNumber(ucn, telephoneNumber);
+        TeacherResponse teacherResponse = teacherConverter.toTeacherResponse(updatedTeacher);
+        return ResponseEntity.ok(teacherResponse);
+
+    }
+
+    @PutMapping(value = "/{ucn}/emailAddress/{emailAddress}")
+    public ResponseEntity<TeacherResponse> updateTeacherEmailAddress(@PathVariable String ucn,
+                                                                     @PathVariable String emailAddress) {
+        Teacher updatedTeacher = teacherService.updateTeacherEmailAddress(ucn, emailAddress);
+        TeacherResponse teacherResponse = teacherConverter.toTeacherResponse(updatedTeacher);
+        return ResponseEntity.ok(teacherResponse);
+
+    }
+
+    @PutMapping(value = "/{ucn}/subject/{subjectName}")
+    public ResponseEntity<TeacherResponse> updateTeacherSubjects(@PathVariable String ucn,
+                                                                 @PathVariable String subjectName) {
+        Teacher updatedTeacher = teacherService.updateTeacherSubjects(ucn, subjectName);
+        TeacherResponse teacherResponse = teacherConverter.toTeacherResponse(updatedTeacher);
+        return ResponseEntity.ok(teacherResponse);
+
+    }
 }

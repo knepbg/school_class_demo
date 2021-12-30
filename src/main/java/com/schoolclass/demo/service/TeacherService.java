@@ -9,7 +9,11 @@ public interface TeacherService {
 
     Teacher save(Teacher teacher);
 
-    Teacher update(Teacher teacher, String ucn, Subject subject);
+    Teacher updateTeacherEmailAddress(String ucn, String emailAddress);
+
+    Teacher updateTeacherTelephoneNumber(String ucn, String telephoneNumber);
+
+    Teacher updateTeacherSubjects(String ucn, String subjectName);
 
     void delete(String ucn);
 

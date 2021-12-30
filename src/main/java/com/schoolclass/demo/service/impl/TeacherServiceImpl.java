@@ -47,15 +47,55 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher update(Teacher teacher, String ucn, Subject subject) {
+    public Teacher updateTeacherSubjects(String ucn, String subjectName) {
+
+        Subject foundSubject = subjectService.findBySubjectName(subjectName);
+        Teacher foundTeacher = findByUcn(ucn);
+
+        Set<Subject> subjectSet = foundTeacher.getSubjects()
+                .stream()
+                .map( subject ->
+                        subjectService.save(foundSubject))
+                .collect(Collectors.toSet());
+
+        Teacher updatedTeacher = Teacher.builder()
+                .id(foundTeacher.getId())
+                .firstName(foundTeacher.getFirstName())
+                .lastName(foundTeacher.getLastName())
+                .ucn(foundTeacher.getUcn())
+                .emailAddress(foundTeacher.getEmailAddress())
+                .telephoneNumber(foundTeacher.getTelephoneNumber())
+                .subjects(subjectSet)
+                .build();
+        return teacherRepository.save(updatedTeacher);
+    }
+
+    @Override
+    public Teacher updateTeacherEmailAddress(String ucn, String emailAddress) {
         Teacher foundTeacher = findByUcn(ucn);
         Teacher updatedTeacher = Teacher.builder()
                 .id(foundTeacher.getId())
-                .emailAddress(teacher.getEmailAddress())
-                .telephoneNumber(teacher.getTelephoneNumber())
-                .subjects(teacher.getSubjects().stream().map(subject1 ->
-                                subjectService.save(subject))
-                        .collect(Collectors.toSet()))
+                .ucn(foundTeacher.getUcn())
+                .firstName(foundTeacher.getFirstName())
+                .lastName(foundTeacher.getLastName())
+                .emailAddress(emailAddress)
+                .telephoneNumber(foundTeacher.getTelephoneNumber())
+                .subjects(foundTeacher.getSubjects())
+                .build();
+        return teacherRepository.save(updatedTeacher);
+    }
+
+    @Override
+    public Teacher updateTeacherTelephoneNumber(String ucn, String telephoneNumber) {
+        Teacher foundTeacher = findByUcn(ucn);
+        Teacher updatedTeacher = Teacher.builder()
+                .id(foundTeacher.getId())
+                .ucn(foundTeacher.getUcn())
+                .firstName(foundTeacher.getFirstName())
+                .lastName(foundTeacher.getLastName())
+                .emailAddress(foundTeacher.getEmailAddress())
+                .telephoneNumber(telephoneNumber)
+                .subjects(foundTeacher.getSubjects())
                 .build();
         return teacherRepository.save(updatedTeacher);
     }

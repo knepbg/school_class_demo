@@ -17,6 +17,8 @@ public class TeacherResponse {
 
     private String lastName;
 
+    private String ucn;
+
     private String telephoneNumber;
 
     private String emailAddress;

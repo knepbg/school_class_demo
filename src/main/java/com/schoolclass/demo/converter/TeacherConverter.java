@@ -50,6 +50,7 @@ public class TeacherConverter {
         return TeacherResponse.builder()
                 .firstName(teacher.getFirstName())
                 .lastName(teacher.getLastName())
+                .ucn(teacher.getUcn())
                 .telephoneNumber(teacher.getTelephoneNumber())
                 .emailAddress(teacher.getEmailAddress())
                 .subjectResponses(teacher.getSubjects().stream()
