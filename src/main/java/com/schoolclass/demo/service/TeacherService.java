@@ -1,6 +1,5 @@
 package com.schoolclass.demo.service;
 
-import com.schoolclass.demo.model.Subject;
 import com.schoolclass.demo.model.Teacher;
 
 import java.util.Set;
@@ -13,7 +12,9 @@ public interface TeacherService {
 
     Teacher updateTeacherTelephoneNumber(String ucn, String telephoneNumber);
 
-    Teacher updateTeacherSubjects(String ucn, String subjectName);
+    Teacher addTeacherSubject(String ucn, String subjectName);
+
+    Teacher deleteTeacherSubject(String ucn, String subjectName);
 
     void delete(String ucn);
 

@@ -3,6 +3,7 @@ package com.schoolclass.demo.controller;
 import com.schoolclass.demo.converter.TeacherConverter;
 import com.schoolclass.demo.dto.TeacherDto;
 import com.schoolclass.demo.dto.TeacherResponse;
+import com.schoolclass.demo.dto.TeacherResponseDelete;
 import com.schoolclass.demo.model.Teacher;
 import com.schoolclass.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,12 +61,34 @@ public class TeacherController {
 
     }
 
-    @PutMapping(value = "/{ucn}/subject/{subjectName}")
-    public ResponseEntity<TeacherResponse> updateTeacherSubjects(@PathVariable String ucn,
-                                                                 @PathVariable String subjectName) {
-        Teacher updatedTeacher = teacherService.updateTeacherSubjects(ucn, subjectName);
+    @PutMapping(value = "/{ucn}/add-subject/{subjectName}")
+    public ResponseEntity<TeacherResponse> addTeacherSubject(@PathVariable String ucn,
+                                                             @PathVariable String subjectName) {
+        Teacher updatedTeacher = teacherService.addTeacherSubject(ucn, subjectName);
         TeacherResponse teacherResponse = teacherConverter.toTeacherResponse(updatedTeacher);
         return ResponseEntity.ok(teacherResponse);
 
     }
+
+    @PutMapping(value = "/{ucn}/delete-subject/{subjectName}")
+    public ResponseEntity<TeacherResponse> deleteTeacherSubject(@PathVariable String ucn,
+                                                                @PathVariable String subjectName) {
+        Teacher updatedTeacher = teacherService.deleteTeacherSubject(ucn, subjectName);
+        TeacherResponse teacherResponse = teacherConverter.toTeacherResponse(updatedTeacher);
+        return ResponseEntity.ok(teacherResponse);
+
+    }
+
+    @DeleteMapping(value = "/{ucn}")
+    public ResponseEntity<TeacherResponseDelete> deleteTeacher(@PathVariable String ucn) {
+        TeacherResponseDelete teacherForDelete = TeacherResponseDelete.builder()
+                .action("Delete")
+                .firstName(teacherService.findByUcn(ucn).getFirstName())
+                .lastName(teacherService.findByUcn(ucn).getLastName())
+                .build();
+        teacherService.delete(ucn);
+        return ResponseEntity.ok(teacherForDelete);
+    }
+
+
 }

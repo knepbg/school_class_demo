@@ -8,10 +8,7 @@ import com.schoolclass.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,16 +44,10 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher updateTeacherSubjects(String ucn, String subjectName) {
-
-        Subject foundSubject = subjectService.findBySubjectName(subjectName);
+    public Teacher addTeacherSubject(String ucn, String subjectName) {
         Teacher foundTeacher = findByUcn(ucn);
-
-        Set<Subject> subjectSet = foundTeacher.getSubjects()
-                .stream()
-                .map( subject ->
-                        subjectService.save(foundSubject))
-                .collect(Collectors.toSet());
+        Set<Subject> updatedSubjectsSet = new HashSet<>(foundTeacher.getSubjects());
+        updatedSubjectsSet.add(subjectService.findBySubjectName(subjectName));
 
         Teacher updatedTeacher = Teacher.builder()
                 .id(foundTeacher.getId())
@@ -65,9 +56,28 @@ public class TeacherServiceImpl implements TeacherService {
                 .ucn(foundTeacher.getUcn())
                 .emailAddress(foundTeacher.getEmailAddress())
                 .telephoneNumber(foundTeacher.getTelephoneNumber())
-                .subjects(subjectSet)
+                .subjects(updatedSubjectsSet)
                 .build();
         return teacherRepository.save(updatedTeacher);
+    }
+
+    @Override
+    public Teacher deleteTeacherSubject(String ucn, String subjectName) {
+        Teacher foundTeacher = findByUcn(ucn);
+        Set<Subject> updatedSubjectsSet = new HashSet<>(foundTeacher.getSubjects());
+        updatedSubjectsSet.remove(subjectService.findBySubjectName(subjectName));
+
+        Teacher updatedTeacher = Teacher.builder()
+                .id(foundTeacher.getId())
+                .firstName(foundTeacher.getFirstName())
+                .lastName(foundTeacher.getLastName())
+                .ucn(foundTeacher.getUcn())
+                .emailAddress(foundTeacher.getEmailAddress())
+                .telephoneNumber(foundTeacher.getTelephoneNumber())
+                .subjects(updatedSubjectsSet)
+                .build();
+        return teacherRepository.save(updatedTeacher);
+
     }
 
     @Override
