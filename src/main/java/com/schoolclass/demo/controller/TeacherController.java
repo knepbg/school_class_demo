@@ -43,7 +43,7 @@ public class TeacherController {
         return ResponseEntity.ok(teacherResponses);
     }
 
-    @PutMapping(value = "/{ucn}/telephoneNumber/{telephoneNumber}")
+    @PutMapping(value = "/{ucn}/telephone-number/{telephoneNumber}")
     public ResponseEntity<TeacherResponse> updateTeacherTelephoneNumber(@PathVariable String ucn,
                                                                         @PathVariable String telephoneNumber) {
         Teacher updatedTeacher = teacherService.updateTeacherTelephoneNumber(ucn, telephoneNumber);
@@ -52,7 +52,7 @@ public class TeacherController {
 
     }
 
-    @PutMapping(value = "/{ucn}/emailAddress/{emailAddress}")
+    @PutMapping(value = "/{ucn}/email-address/{emailAddress}")
     public ResponseEntity<TeacherResponse> updateTeacherEmailAddress(@PathVariable String ucn,
                                                                      @PathVariable String emailAddress) {
         Teacher updatedTeacher = teacherService.updateTeacherEmailAddress(ucn, emailAddress);
@@ -88,6 +88,36 @@ public class TeacherController {
                 .build();
         teacherService.delete(ucn);
         return ResponseEntity.ok(teacherForDelete);
+    }
+
+    @GetMapping(value = "/first-name/{firstName}")
+    public ResponseEntity<Set<TeacherResponse>> findByFirstName(@PathVariable String firstName) {
+        Set<Teacher> foundTeachers = teacherService.findByFirstName(firstName);
+        Set<TeacherResponse> teacherResponseSet = foundTeachers.stream()
+                .map(teacherConverter::toTeacherResponse)
+                .collect(Collectors.toSet());
+        return ResponseEntity.ok(teacherResponseSet);
+    }
+
+    @GetMapping(value = "/last-name/{lastName}")
+    public ResponseEntity<Set<TeacherResponse>> findByLastName(@PathVariable String lastName) {
+        Set<Teacher> foundTeachers = teacherService.findByLastName(lastName);
+        Set<TeacherResponse> teacherResponseSet = foundTeachers.stream()
+                .map(teacherConverter::toTeacherResponse)
+                .collect(Collectors.toSet());
+        return ResponseEntity.ok(teacherResponseSet);
+    }
+
+    @GetMapping(value = "/telephone-number/{telephoneNumber}")
+    public ResponseEntity<TeacherResponse> findByTelephoneNumber(@PathVariable String telephoneNumber) {
+        Teacher foundTeacher = teacherService.findByTelephoneNumber(telephoneNumber);
+        return ResponseEntity.ok(teacherConverter.toTeacherResponse(foundTeacher));
+    }
+
+    @GetMapping(value = "/email-address/{emailAddress}")
+    public ResponseEntity<TeacherResponse> findByEmailAddress(@PathVariable String emailAddress) {
+        Teacher foundTeacher = teacherService.findByEmailAddress(emailAddress);
+        return ResponseEntity.ok(teacherConverter.toTeacherResponse(foundTeacher));
     }
 
 
