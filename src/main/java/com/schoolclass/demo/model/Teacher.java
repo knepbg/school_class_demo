@@ -8,7 +8,9 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -24,23 +26,28 @@ public class Teacher {
     private Long id;
 
     @NotNull
+    @Size(max = 20,message = "First name must be between  20 chars max.")
     @Column(nullable = false)
     private String firstName;
 
     @NotNull
     @Column(nullable = false)
+    @Size(max = 20,message = "Last name must be between  20 chars max.")
     private String lastName;
 
     @NotNull
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false, unique = true)
+    @Size(min = 10,max = 10, message = "Ucn is 10 chars")
     private String ucn;
 
-    // length 13 such as +359 876 123 456
+
     @NotNull
     @Column(unique = true, nullable = false)
+    @Size(max = 13)
     private String telephoneNumber;
 
     @Column(unique = true)
+    @Email(message = "Email format is incorrect -->  xxxx@xxxx.xxx")
     private String emailAddress;
 
     @ManyToMany

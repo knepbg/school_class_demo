@@ -1,5 +1,7 @@
 package com.schoolclass.demo.service.impl;
 
+import com.schoolclass.demo.exception.DuplicateRecordException;
+import com.schoolclass.demo.exception.ResourceNotFoundException;
 import com.schoolclass.demo.model.Subject;
 import com.schoolclass.demo.model.Teacher;
 import com.schoolclass.demo.repository.TeacherRepository;
@@ -26,26 +28,36 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher save(Teacher teacher) {
 
-        Set<Subject> subjects1 = teacher.getSubjects().stream()
-                .map((subject) -> subjectService.findById(subject.getId()))
-                .collect(Collectors.toSet());
+        try {
+            Set<Subject> subjects1 = teacher.getSubjects().stream()
+                    .map((subject) -> subjectService.findById(subject.getId()))
+                    .collect(Collectors.toSet());
 
-        Teacher savedTeacher = Teacher.builder()
-                .id(teacher.getId())
-                .telephoneNumber(teacher.getTelephoneNumber())
-                .emailAddress(teacher.getEmailAddress())
-                .firstName(teacher.getFirstName())
-                .lastName(teacher.getLastName())
-                .ucn(teacher.getUcn())
-                .subjects(subjects1)
-                .build();
+            Teacher savedTeacher = Teacher.builder()
+                    .id(teacher.getId())
+                    .telephoneNumber(teacher.getTelephoneNumber())
+                    .emailAddress(teacher.getEmailAddress())
+                    .firstName(teacher.getFirstName())
+                    .lastName(teacher.getLastName())
+                    .ucn(teacher.getUcn())
+                    .subjects(subjects1)
+                    .build();
 
-        return teacherRepository.save(savedTeacher);
+            return teacherRepository.save(savedTeacher);
+
+        } catch (Exception e) {
+
+            throw new DuplicateRecordException(String.format("Duplicate Record"));
+
+        }
+
     }
 
     @Override
     public Teacher addTeacherSubject(String ucn, String subjectName) {
+
         Teacher foundTeacher = findByUcn(ucn);
+
         Set<Subject> updatedSubjectsSet = new HashSet<>(foundTeacher.getSubjects());
         updatedSubjectsSet.add(subjectService.findBySubjectName(subjectName));
 
@@ -83,16 +95,21 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher updateTeacherEmailAddress(String ucn, String emailAddress) {
         Teacher foundTeacher = findByUcn(ucn);
-        Teacher updatedTeacher = Teacher.builder()
-                .id(foundTeacher.getId())
-                .ucn(foundTeacher.getUcn())
-                .firstName(foundTeacher.getFirstName())
-                .lastName(foundTeacher.getLastName())
-                .emailAddress(emailAddress)
-                .telephoneNumber(foundTeacher.getTelephoneNumber())
-                .subjects(foundTeacher.getSubjects())
-                .build();
-        return teacherRepository.save(updatedTeacher);
+        try {
+            Teacher updatedTeacher = Teacher.builder()
+                    .id(foundTeacher.getId())
+                    .ucn(foundTeacher.getUcn())
+                    .firstName(foundTeacher.getFirstName())
+                    .lastName(foundTeacher.getLastName())
+                    .emailAddress(emailAddress)
+                    .telephoneNumber(foundTeacher.getTelephoneNumber())
+                    .subjects(foundTeacher.getSubjects())
+                    .build();
+            return teacherRepository.save(updatedTeacher);
+        } catch (Exception e) {
+            throw new
+        }
+
     }
 
     @Override
@@ -117,11 +134,11 @@ public class TeacherServiceImpl implements TeacherService {
         teacherRepository.deleteById(foundTeacher.getId());
     }
 
-    //TODO: need to config exception
     @Override
     public Teacher findByUcn(String ucn) {
         return teacherRepository.findByUcn(ucn)
-                .orElseThrow(IllegalAccessError::new);
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Teacher with %s ucn, is not exist", ucn)));
     }
 
     //TODO:  need to config exception

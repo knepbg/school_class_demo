@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class TeacherController {
     }
 
     @PostMapping
-    public ResponseEntity<TeacherResponse> save(@RequestBody TeacherDto teacherDto) {
+    public ResponseEntity<TeacherResponse> save(@RequestBody @Valid TeacherDto teacherDto) {
         Teacher requestSaveTeacher = teacherConverter.toTeacher(teacherDto);
         Teacher savedTeacher = teacherService.save(requestSaveTeacher);
         TeacherResponse teacherResponse = teacherConverter.toTeacherResponse(savedTeacher);
@@ -53,8 +54,8 @@ public class TeacherController {
     }
 
     @PutMapping(value = "/{ucn}/email-address/{emailAddress}")
-    public ResponseEntity<TeacherResponse> updateTeacherEmailAddress(@PathVariable String ucn,
-                                                                     @PathVariable String emailAddress) {
+    public ResponseEntity<TeacherResponse> updateTeacherEmailAddress(@PathVariable @Valid String ucn,
+                                                                     @PathVariable @Valid String emailAddress) {
         Teacher updatedTeacher = teacherService.updateTeacherEmailAddress(ucn, emailAddress);
         TeacherResponse teacherResponse = teacherConverter.toTeacherResponse(updatedTeacher);
         return ResponseEntity.ok(teacherResponse);
@@ -115,7 +116,7 @@ public class TeacherController {
     }
 
     @GetMapping(value = "/email-address/{emailAddress}")
-    public ResponseEntity<TeacherResponse> findByEmailAddress(@PathVariable String emailAddress) {
+    public ResponseEntity<TeacherResponse> findByEmailAddress(@PathVariable @Valid String emailAddress) {
         Teacher foundTeacher = teacherService.findByEmailAddress(emailAddress);
         return ResponseEntity.ok(teacherConverter.toTeacherResponse(foundTeacher));
     }

@@ -1,5 +1,6 @@
 package com.schoolclass.demo.service.impl;
 
+import com.schoolclass.demo.exception.ResourceNotFoundException;
 import com.schoolclass.demo.model.Subject;
 import com.schoolclass.demo.repository.SubjectRepository;
 import com.schoolclass.demo.service.SubjectService;
@@ -49,7 +50,8 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public Subject findBySubjectName(String subjectName) {
         return subjectRepository.findBySubjectName(subjectName)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        String.format("Subject with %s subject name, is not exist", subjectName)));
     }
 
     //TODO: need to config exceptions
