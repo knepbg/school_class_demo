@@ -43,7 +43,7 @@ public class Teacher {
 
     @NotNull
     @Column(unique = true, nullable = false)
-    @Size(max = 13)
+    @Size(max = 13 , message = "Tel.number must be between 0 and 13")
     private String telephoneNumber;
 
     @Column(unique = true)

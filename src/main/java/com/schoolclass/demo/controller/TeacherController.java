@@ -46,7 +46,7 @@ public class TeacherController {
 
     @PutMapping(value = "/{ucn}/telephone-number/{telephoneNumber}")
     public ResponseEntity<TeacherResponse> updateTeacherTelephoneNumber(@PathVariable String ucn,
-                                                                        @PathVariable String telephoneNumber) {
+                                                                        @PathVariable @Valid String telephoneNumber) {
         Teacher updatedTeacher = teacherService.updateTeacherTelephoneNumber(ucn, telephoneNumber);
         TeacherResponse teacherResponse = teacherConverter.toTeacherResponse(updatedTeacher);
         return ResponseEntity.ok(teacherResponse);
@@ -54,7 +54,7 @@ public class TeacherController {
     }
 
     @PutMapping(value = "/{ucn}/email-address/{emailAddress}")
-    public ResponseEntity<TeacherResponse> updateTeacherEmailAddress(@PathVariable @Valid String ucn,
+    public ResponseEntity<TeacherResponse> updateTeacherEmailAddress(@PathVariable String ucn,
                                                                      @PathVariable @Valid String emailAddress) {
         Teacher updatedTeacher = teacherService.updateTeacherEmailAddress(ucn, emailAddress);
         TeacherResponse teacherResponse = teacherConverter.toTeacherResponse(updatedTeacher);

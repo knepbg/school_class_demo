@@ -1,7 +1,11 @@
 package com.schoolclass.demo.exception;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(H)
+@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class IncorrectFormatException extends RuntimeException {
+    public IncorrectFormatException(String message) {
+        super(message);
+    }
 }

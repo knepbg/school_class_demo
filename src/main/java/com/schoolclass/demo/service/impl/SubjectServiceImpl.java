@@ -45,8 +45,6 @@ public class SubjectServiceImpl implements SubjectService {
         subjectRepository.deleteById(foundBySubjectName.getId());
     }
 
-    // TODO: need to config exceptions
-    // subject name is unique
     @Override
     public Subject findBySubjectName(String subjectName) {
         return subjectRepository.findBySubjectName(subjectName)

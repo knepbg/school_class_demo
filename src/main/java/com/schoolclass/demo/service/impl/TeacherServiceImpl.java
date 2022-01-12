@@ -75,7 +75,9 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher deleteTeacherSubject(String ucn, String subjectName) {
+
         Teacher foundTeacher = findByUcn(ucn);
+
         Set<Subject> updatedSubjectsSet = new HashSet<>(foundTeacher.getSubjects());
         updatedSubjectsSet.remove(subjectService.findBySubjectName(subjectName));
 
@@ -96,6 +98,9 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher updateTeacherEmailAddress(String ucn, String emailAddress) {
         Teacher foundTeacher = findByUcn(ucn);
         try {
+            findByEmailAddress(emailAddress);
+            throw new DuplicateRecordException(String.format("Teacher with %s email, already exist,try another email", emailAddress));
+        } catch (ResourceNotFoundException exception) {
             Teacher updatedTeacher = Teacher.builder()
                     .id(foundTeacher.getId())
                     .ucn(foundTeacher.getUcn())
@@ -106,8 +111,6 @@ public class TeacherServiceImpl implements TeacherService {
                     .subjects(foundTeacher.getSubjects())
                     .build();
             return teacherRepository.save(updatedTeacher);
-        } catch (Exception e) {
-            throw new
         }
 
     }
@@ -115,18 +118,23 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher updateTeacherTelephoneNumber(String ucn, String telephoneNumber) {
         Teacher foundTeacher = findByUcn(ucn);
-        Teacher updatedTeacher = Teacher.builder()
-                .id(foundTeacher.getId())
-                .ucn(foundTeacher.getUcn())
-                .firstName(foundTeacher.getFirstName())
-                .lastName(foundTeacher.getLastName())
-                .emailAddress(foundTeacher.getEmailAddress())
-                .telephoneNumber(telephoneNumber)
-                .subjects(foundTeacher.getSubjects())
-                .build();
-        return teacherRepository.save(updatedTeacher);
-    }
+        try {
+            findByTelephoneNumber(telephoneNumber);
+            throw new DuplicateRecordException(String.format("Teacher with %s tel. number, already exist,try another t.number", telephoneNumber));
+        } catch (ResourceNotFoundException exception) {
+            Teacher updatedTeacher = Teacher.builder()
+                    .id(foundTeacher.getId())
+                    .ucn(foundTeacher.getUcn())
+                    .firstName(foundTeacher.getFirstName())
+                    .lastName(foundTeacher.getLastName())
+                    .emailAddress(foundTeacher.getEmailAddress())
+                    .telephoneNumber(telephoneNumber)
+                    .subjects(foundTeacher.getSubjects())
+                    .build();
+            return teacherRepository.save(updatedTeacher);
+        }
 
+    }
 
     @Override
     public void delete(String ucn) {
@@ -141,27 +149,30 @@ public class TeacherServiceImpl implements TeacherService {
                         String.format("Teacher with %s ucn, is not exist", ucn)));
     }
 
-    //TODO:  need to config exception
     @Override
     public Teacher findByTelephoneNumber(String telephoneNumber) {
         return teacherRepository.findByTelephoneNumber(telephoneNumber)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("There are no teacher whit %s number", telephoneNumber)));
     }
 
-    //TODO: need to config exception
     @Override
     public Teacher findByEmailAddress(String emailAddress) {
         return teacherRepository.findByEmailAddress(emailAddress)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("There are no teacher whit %s email", emailAddress)));
     }
 
-    //TODO: need to config exception
+    // TODO: HERE!
     @Override
     public Set<Teacher> findByFirstName(String firstName) {
-        SortedSet<Teacher> teachers = new TreeSet<>(Comparator
-                .comparing(Teacher::getFirstName));
-        teachers.addAll(teacherRepository.findByFirstName(firstName));
-        return teachers;
+//
+//        Set<Teacher> teachers = new HashSet<>();
+//        teachers.stream().map( teacherRepository.findByFirstName(firstName)
+//        ).collect(Collectors.toSet());
+
+//                addAll(teacherRepository.findByFirstName(firstName).orElseThrow(() ->
+//                new ResourceNotFoundException(String.format("Teacher whit first name %s, not found", firstName))));
+//        return teachers;
+        return null;
     }
 
 
