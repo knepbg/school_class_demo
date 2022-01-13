@@ -27,7 +27,6 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher save(Teacher teacher) {
-
         try {
             Set<Subject> subjects1 = teacher.getSubjects().stream()
                     .map((subject) -> subjectService.findById(subject.getId()))
@@ -161,28 +160,20 @@ public class TeacherServiceImpl implements TeacherService {
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("There are no teacher whit %s email", emailAddress)));
     }
 
-    // TODO: HERE!
     @Override
-    public Set<Teacher> findByFirstName(String firstName) {
-//
-//        Set<Teacher> teachers = new HashSet<>();
-//        teachers.stream().map( teacherRepository.findByFirstName(firstName)
-//        ).collect(Collectors.toSet());
-
-//                addAll(teacherRepository.findByFirstName(firstName).orElseThrow(() ->
-//                new ResourceNotFoundException(String.format("Teacher whit first name %s, not found", firstName))));
-//        return teachers;
-        return null;
+    public List<Teacher> findByFirstName(String firstName) {
+        if (teacherRepository.findByFirstName(firstName).isEmpty()) {
+            throw new ResourceNotFoundException(String.format("There are no teachers whit name %s", firstName));
+        }
+        return teacherRepository.findByFirstName(firstName);
     }
 
-
-    //TODO: need to config exception
     @Override
-    public Set<Teacher> findByLastName(String lastName) {
-        SortedSet<Teacher> teachers = new TreeSet<>(Comparator
-                .comparing(Teacher::getLastName));
-        teachers.addAll(teacherRepository.findByLastName(lastName));
-        return teachers;
+    public List<Teacher> findByLastName(String lastName) {
+        if (teacherRepository.findByLastName(lastName).isEmpty()) {
+            throw new ResourceNotFoundException(String.format("There are no teachers whit last name : %s", lastName));
+        }
+        return teacherRepository.findByLastName(lastName);
     }
 
     @Override

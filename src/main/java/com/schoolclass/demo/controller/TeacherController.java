@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -92,20 +93,20 @@ public class TeacherController {
     }
 
     @GetMapping(value = "/first-name/{firstName}")
-    public ResponseEntity<Set<TeacherResponse>> findByFirstName(@PathVariable String firstName) {
-        Set<Teacher> foundTeachers = teacherService.findByFirstName(firstName);
-        Set<TeacherResponse> teacherResponseSet = foundTeachers.stream()
+    public ResponseEntity<List<TeacherResponse>> findByFirstName(@PathVariable String firstName) {
+        List<Teacher> foundTeachers = teacherService.findByFirstName(firstName);
+        List<TeacherResponse> teacherResponseSet = foundTeachers.stream()
                 .map(teacherConverter::toTeacherResponse)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         return ResponseEntity.ok(teacherResponseSet);
     }
 
     @GetMapping(value = "/last-name/{lastName}")
-    public ResponseEntity<Set<TeacherResponse>> findByLastName(@PathVariable String lastName) {
-        Set<Teacher> foundTeachers = teacherService.findByLastName(lastName);
-        Set<TeacherResponse> teacherResponseSet = foundTeachers.stream()
+    public ResponseEntity<List<TeacherResponse>> findByLastName(@PathVariable String lastName) {
+        List<Teacher> foundTeachers = teacherService.findByLastName(lastName);
+        List<TeacherResponse> teacherResponseSet = foundTeachers.stream()
                 .map(teacherConverter::toTeacherResponse)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         return ResponseEntity.ok(teacherResponseSet);
     }
 

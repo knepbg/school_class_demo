@@ -2,6 +2,7 @@ package com.schoolclass.demo.service;
 
 import com.schoolclass.demo.model.Teacher;
 
+import java.util.List;
 import java.util.Set;
 
 public interface TeacherService {
@@ -24,9 +25,9 @@ public interface TeacherService {
 
     Teacher findByEmailAddress(String emailAddress);
 
-    Set<Teacher> findByFirstName(String firstName);
+    List<Teacher> findByFirstName(String firstName);
 
-    Set<Teacher> findByLastName(String lastName);
+    List<Teacher> findByLastName(String lastName);
 
     Set<Teacher> findAll();
 
