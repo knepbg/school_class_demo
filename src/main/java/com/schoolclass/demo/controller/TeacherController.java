@@ -1,9 +1,9 @@
 package com.schoolclass.demo.controller;
 
 import com.schoolclass.demo.converter.TeacherConverter;
-import com.schoolclass.demo.dto.TeacherDto;
-import com.schoolclass.demo.dto.TeacherResponse;
-import com.schoolclass.demo.dto.TeacherResponseDelete;
+import com.schoolclass.demo.dto.teacherDto.TeacherDto;
+import com.schoolclass.demo.dto.teacherDto.TeacherResponse;
+import com.schoolclass.demo.dto.teacherDto.TeacherResponseDelete;
 import com.schoolclass.demo.model.Teacher;
 import com.schoolclass.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;

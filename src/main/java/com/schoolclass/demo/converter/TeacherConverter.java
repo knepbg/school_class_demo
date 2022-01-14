@@ -1,7 +1,7 @@
 package com.schoolclass.demo.converter;
 
-import com.schoolclass.demo.dto.TeacherDto;
-import com.schoolclass.demo.dto.TeacherResponse;
+import com.schoolclass.demo.dto.teacherDto.TeacherDto;
+import com.schoolclass.demo.dto.teacherDto.TeacherResponse;
 import com.schoolclass.demo.model.Subject;
 import com.schoolclass.demo.model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
