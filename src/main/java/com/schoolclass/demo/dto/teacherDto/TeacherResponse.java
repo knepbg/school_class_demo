@@ -1,6 +1,6 @@
 package com.schoolclass.demo.dto.teacherDto;
 
-import com.schoolclass.demo.dto.SubjectResponse;
+import com.schoolclass.demo.dto.subjectDto.SubjectResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

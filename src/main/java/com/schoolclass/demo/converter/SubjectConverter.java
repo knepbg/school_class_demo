@@ -1,7 +1,7 @@
 package com.schoolclass.demo.converter;
 
-import com.schoolclass.demo.dto.SubjectDto;
-import com.schoolclass.demo.dto.SubjectResponse;
+import com.schoolclass.demo.dto.subjectDto.SubjectDto;
+import com.schoolclass.demo.dto.subjectDto.SubjectResponse;
 import com.schoolclass.demo.model.Subject;
 import org.springframework.stereotype.Component;
 

@@ -27,7 +27,7 @@ public class Great {
 
     @NotNull
     @Column(unique = true, nullable = false)
-    @Size(min = 2, max = 6, message = "GreatValue must be between 2 and 6")
+//    @Size(max = 6, min = 2)
     private Integer greatValue;
 
 }

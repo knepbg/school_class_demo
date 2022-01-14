@@ -10,5 +10,7 @@ public interface GreatService {
 
     Great save(Great great);
 
+    void deleteAll ();
+
 
 }

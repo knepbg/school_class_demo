@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Size;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -16,6 +15,6 @@ public class GreatDto {
 
     private String greatName;
 
-    @Size(min = 2, max = 6, message = "GreatValue must be between 2 and 6")
+//    @Size(max = 6, min = 2)
     private Integer greatValue;
 }

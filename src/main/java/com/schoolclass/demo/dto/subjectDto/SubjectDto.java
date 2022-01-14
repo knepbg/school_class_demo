@@ -1,4 +1,4 @@
-package com.schoolclass.demo.dto;
+package com.schoolclass.demo.dto.subjectDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

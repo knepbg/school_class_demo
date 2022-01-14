@@ -1,7 +1,7 @@
 package com.schoolclass.demo.controller;
 
 import com.schoolclass.demo.converter.SubjectConverter;
-import com.schoolclass.demo.dto.SubjectDto;
+import com.schoolclass.demo.dto.subjectDto.SubjectDto;
 import com.schoolclass.demo.model.Subject;
 import com.schoolclass.demo.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
