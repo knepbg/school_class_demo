@@ -36,7 +36,7 @@ public class GreatController {
     }
 
     @PostMapping
-    public ResponseEntity<GreatDto> save(@RequestBody @Valid GreatDto greatDto) {
+    public ResponseEntity<GreatDto> save(@RequestBody GreatDto greatDto) {
         Great greatForSave = greatConverter.toGreat(greatDto);
         Great savedGreat = greatService.save(greatForSave);
         return ResponseEntity.ok(greatConverter.toGreatDto(savedGreat));

@@ -2,6 +2,7 @@ package com.schoolclass.demo.controller;
 
 import com.schoolclass.demo.converter.SubjectConverter;
 import com.schoolclass.demo.dto.subjectDto.SubjectDto;
+import com.schoolclass.demo.dto.subjectDto.SubjectResponse;
 import com.schoolclass.demo.model.Subject;
 import com.schoolclass.demo.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,12 @@ public class SubjectController {
                 .map(subjectConverter::toSubjectDto)
                 .collect(Collectors.toSet()));
         return ResponseEntity.ok(responseSubjectDto);
+    }
+
+    @PutMapping(value = "{subjectName}/new-subject-name/{newSubjectName}")
+    public ResponseEntity<SubjectResponse> update(@PathVariable String subjectName,
+                                                  @PathVariable String newSubjectName) {
+        Subject updatedSubject = subjectService.update(subjectName, newSubjectName);
+        return ResponseEntity.ok(subjectConverter.toSubjectResponse(updatedSubject));
     }
 }

@@ -29,11 +29,11 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public Subject update(Long id, Subject subject) {
-        Subject findSubject = findById(id);
+    public Subject update(String subjectName, String newSubjectName) {
+        Subject findSubject = findBySubjectName(subjectName);
         Subject updatedSubject = Subject.builder()
                 .id(findSubject.getId())
-                .subjectName(subject.getSubjectName())
+                .subjectName(newSubjectName)
                 .build();
         return subjectRepository.save(updatedSubject);
     }
@@ -52,11 +52,10 @@ public class SubjectServiceImpl implements SubjectService {
                         String.format("Subject with %s subject name, is not exist", subjectName)));
     }
 
-    //TODO: need to config exceptions
     @Override
     public Subject findById(Long id) {
         return subjectRepository.findById(id)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new ResourceNotFoundException("No subject found"));
     }
 
     @Override

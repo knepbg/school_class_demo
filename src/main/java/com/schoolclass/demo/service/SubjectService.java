@@ -8,7 +8,7 @@ public interface SubjectService {
 
     Subject save(Subject subject);
 
-    Subject update(Long id, Subject subject);
+    Subject update(String subjectName, String newSubjectName);
 
     void delete(String subjectName);
 
